@@ -8,6 +8,7 @@ router.get('/', FrameController.getAllFrames);
 router.get('/:id', FrameController.getFrameByID);
 router.post('/', upload.single('img'), FrameController.createNewFrame);
 router.put('/:id', upload.single('img'), FrameController.updateFrame);
+router.delete('/:id', FrameController.deleteFrame);
 
 module.exports = router;
 

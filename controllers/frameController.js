@@ -29,7 +29,15 @@ const FrameController = {
             }
         });
         res.status(200).send("updated");
+    },
 
+    async deleteFrame(req, res){
+        await Frame.destroy({
+            where : {
+                id:req.params.id
+            }
+        });
+        res.status(200).send("deleted");
     }
 }
 

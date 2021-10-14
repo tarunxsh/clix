@@ -1,0 +1,28 @@
+{
+  "name": "clix",
+  "version": "1.0.0",
+  "description": "Image sharing api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarunesh1234/clix.git"
+  },
+  "author": "Tarunesh Kumar Gautam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarunesh1234/clix/issues"
+  },
+  "homepage": "https://github.com/tarunesh1234/clix#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "multer": "^1.4.3",
+    "pg": "^8.7.1",
+    "sequelize": "^6.7.0"
+  }
+}

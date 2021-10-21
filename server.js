@@ -4,9 +4,8 @@ dotenv.config();
 
 const createError = require('http-errors');
 const express = require('express');
-const session = require('express-session');
 const passport = require('passport');
-const db = require('./db.js');
+const db = require('./db');
 const api = require('./api/index');
 
 // check db connection
@@ -27,26 +26,14 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// session setup
-// by default session is stored in memory 
-// default session name : 'connect.sid'.
-// access session : req.session
-app.use(session({
-  secret: process.env.SECRET, // used to validate session
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-      maxAge: 1000 * 60 * 60 * 24 // Equals 1 day (1 day * 24 hr/1 day * 60 min/1 hr * 60 sec/1 min * 1000 ms / 1 sec)
-  }
-}));
 
 // passport setup
 require('./config/passport');
 app.use(passport.initialize());
-app.use(passport.session());
 
 app.use('/media', express.static('uploads')); // uploaded files are now available under /media url
-app.use('/', api);
+app.get('/', (req,res) => res.json('Express Node Server'));
+app.use('/api', api);
 
 
 // if requested url is not from above show error

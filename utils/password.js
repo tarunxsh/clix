@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const jsonwebtoken = require('jsonwebtoken');
 
 function genPassword(password) {
     var salt = crypto.randomBytes(32).toString('hex');
@@ -15,5 +16,21 @@ function validPassword(password, hash, salt) {
     return hash === hashVerify;
 }
 
+function issueJWT(user) {
+  const payload = {
+    sub: user.id,
+    iat: Date.now()
+  };
+  
+  const expiresIn = '1d';
+  const signedToken = jsonwebtoken.sign(payload, process.env.SECRET, { expiresIn: expiresIn});
+
+  return {
+    token: "Bearer " + signedToken,
+    expires: expiresIn
+  }
+}
+
 module.exports.validPassword = validPassword;
 module.exports.genPassword = genPassword;
+module.exports.issueJWT = issueJWT;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const {isAuth, isAdmin, isOwner} = require('../middlewares/auth.middleware');
 const {register, login, logout} = require('../controllers/auth.controller');
 
 
@@ -40,7 +41,7 @@ router.get('/register', (req, res, next) => {
 
 
 // curl -H "Authorization: Bearer jwttoken" http://localhost:8000/auth/protected
-router.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+router.get('/protected', isAuth, (req, res, next) => {
     res.status(200).json({ success: true, msg: "You are successfully authenticated to this route!"});
 });
 

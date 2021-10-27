@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const {isAuth, isAdmin, isOwner} = require('../middlewares/auth.middleware');
 const FrameController = require('../controllers/frame.controller');
 const upload = require('../middlewares/upload');
 
 
 router.get('/', FrameController.getAllFrames);
 router.get('/:id', FrameController.getFrameByID);
-router.post('/', upload.single('img'), FrameController.createNewFrame);
-router.put('/:id', upload.single('img'), FrameController.updateFrame);
-router.delete('/:id', FrameController.deleteFrame);
+router.post('/', isAuth, upload.single('img'), FrameController.createNewFrame);
+router.put('/:id', isAuth, isOwner, upload.single('img'), FrameController.updateFrame);
+router.delete('/:id', isAuth, isOwner, FrameController.deleteFrame);
 
 module.exports = router;
 

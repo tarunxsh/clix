@@ -4,7 +4,9 @@ dotenv.config();
 
 const createError = require('http-errors');
 const express = require('express');
-const db = require('./db.js');
+const passport = require('passport');
+const db = require('./db');
+const api = require('./api/index');
 
 // check db connection
 db.authenticate()
@@ -18,14 +20,20 @@ console.error('Unable to connect to the database:', err);
 
 const app = express();
 const port = process.env.PORT || 3000;
-const api = require('./api/index');
 
 
 //setup middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+
+// passport setup
+require('./config/passport');
+app.use(passport.initialize());
+
 app.use('/media', express.static('uploads')); // uploaded files are now available under /media url
-app.use('/', api);
+app.get('/', (req,res) => res.json('Express Node Server'));
+app.use('/api', api);
 
 
 // if requested url is not from above show error

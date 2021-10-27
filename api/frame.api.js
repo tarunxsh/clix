@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const FrameController = require('../controllers/frameController');
+const FrameController = require('../controllers/frame.controller');
 const upload = require('../middlewares/upload');
 
 

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-const db = require('../db.js');
-
+const db = require('../db');
+const Frame = require('./frame');
 
 const User = db.define('user', {
     id: {
@@ -19,5 +19,8 @@ const User = db.define('user', {
     }
 });
 
+
+User.hasMany(Frame);
+Frame.belongsTo(User);
 
 module.exports = User;

@@ -16,7 +16,7 @@ const FrameController = {
     },
 
     async createNewFrame(req, res){
-        res.send(await Frame.create({src:req.file.filename, ...req.body}));
+        res.send(await Frame.create({src:req.file.filename, userId:req.user.id, ...req.body}));
     },
 
     async updateFrame(req, res){

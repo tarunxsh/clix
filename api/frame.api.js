@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {isAuth, isAdmin, isOwner} = require('../middlewares/auth.middleware');
+const {isAuth, isOwner} = require('../middlewares/auth.middleware');
 const FrameController = require('../controllers/frame.controller');
 const upload = require('../middlewares/upload');
 

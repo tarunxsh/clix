@@ -57,3 +57,5 @@ app.use(function(err, req, res, next) {
 db.sync().then(() => {
     app.listen(port, ()=>console.log(`server starts listening on ${port}`));
 });
+
+module.exports = app;

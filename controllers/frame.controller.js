@@ -21,14 +21,14 @@ const FrameController = {
 
     async updateFrame(req, res){
         let data = req.body;
-        data.src = req.file.filename;
+       if(req.file) data.src = req.file.filename;
 
         await Frame.update(data, {
             where : {
                 id:req.params.id
             }
         });
-        res.status(200).send("updated");
+        res.status(200).json("updated");
     },
 
     async deleteFrame(req, res){
@@ -37,7 +37,7 @@ const FrameController = {
                 id:req.params.id
             }
         });
-        res.status(200).send("deleted");
+        res.status(200).json("deleted");
     }
 }
 
